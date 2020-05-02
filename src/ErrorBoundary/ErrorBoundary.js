@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export class ErrorBoundary extends Component {
   state = {
-    error: null
+    error: ''
   }
 
   componentDidCatch(error) {
@@ -15,7 +15,7 @@ export class ErrorBoundary extends Component {
    if(this.state.error) {
     return (
       <div>
-        <p>{this.state.error.toSrtring()}</p>
+        <p>{this.state.error.toString()}</p>
       </div>
     )
    }
