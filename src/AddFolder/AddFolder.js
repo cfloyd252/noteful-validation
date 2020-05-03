@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import ValidationError from '../ValidationError/ValidationError'
+import ApiContext from '../ApiContext'
 
 export class AddFolder extends Component {
+  static contextType = ApiContext
+
   state = {
     folderName: {
       value: '',
@@ -37,10 +40,17 @@ export class AddFolder extends Component {
         name: folderName.value,
       })
     })
-    .then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-      )
-      .catch(err => console.error(err))
+    .then((res) => {
+      if(!res.ok) {
+        return res.json().then((e) => Promise.reject(e))
+      } 
+      return res.json()
+    })
+    .then(folder => {
+      this.context.addFolder(folder)
+      this.props.history.push(`/`)
+    })
+    .catch(err => console.error(err))
   }
 
   render() {
@@ -56,6 +66,7 @@ export class AddFolder extends Component {
         <input 
           id='new-folder-name'
           name='name'
+          required
           onChange={e => this.updateFolderName(e.target.value)}
         />
         {this.state.folderName.touched && (

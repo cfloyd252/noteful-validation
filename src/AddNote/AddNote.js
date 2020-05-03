@@ -74,13 +74,17 @@ export class AddNote extends Component {
         name: name.value,
         content: content.value,
         folderId: folderId.value,
+        modified: Date(Date.now())
       })
     })
     .then((res) => {
       if(!res.ok) {
         return res.json().then((e) => Promise.reject(e))
       } 
-      res.json()
+      return res.json()
+    })
+    .then(note => {
+      this.context.addNote(note)
       this.props.history.push(`/folder/${folderId.value}`)
     })
     .catch(err => console.error(err))

@@ -39,6 +39,18 @@ class App extends Component {
             });
     }
 
+    addFolder = (folder) =>  {
+        this.setState({
+            folders: [...this.state.folders, folder]
+        })
+    }
+
+    addNote = (note) => {
+        this.setState({
+            notes: [...this.state.notes, note]
+        })
+    }
+
     handleDeleteNote = noteId => {
         this.setState({
             notes: this.state.notes.filter(note => note.id !== noteId)
@@ -85,7 +97,9 @@ class App extends Component {
         const value = {
             notes: this.state.notes,
             folders: this.state.folders,
-            deleteNote: this.handleDeleteNote
+            addFolder: this.addFolder,
+            addNote: this.addNote,
+            deleteNote: this.handleDeleteNote,
         };
         return (
             <ApiContext.Provider value={value}>
