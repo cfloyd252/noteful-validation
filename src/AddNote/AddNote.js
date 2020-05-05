@@ -145,7 +145,7 @@ export class AddNote extends Component {
         <button
           type='submit'
         >
-          Sumbit
+          Submit
         </button>
       </form>
     )

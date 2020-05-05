@@ -73,12 +73,12 @@ export class AddFolder extends Component {
           <ValidationError message={this.validateFolderName()} />
         )}
         <button
-          type='submit'
+          type='Submit'
           disabled={
             this.validateFolderName()
           }
         >
-          Sumbit
+          Submit
         </button>
       </form>
     )
