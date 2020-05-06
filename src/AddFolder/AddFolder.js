@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ValidationError from '../ValidationError/ValidationError'
 import ApiContext from '../ApiContext'
+import config from '../config'
 
 export class AddFolder extends Component {
   static contextType = ApiContext
@@ -31,7 +32,7 @@ export class AddFolder extends Component {
   handleSubmit(e){
     e.preventDefault()
     const { folderName } = this.state
-    fetch('http://localhost:9090/folders', {
+    fetch(`${config.API_ENDPOINT}/folders`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

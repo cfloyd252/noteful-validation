@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "alias": "christopher-noteful-app",
+  "name": "noteful-validation",
+  "routes": [
+    {
+      "src": "^/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": ".*",
+      "dest": "/index.html"
+    }
+  ]
+}

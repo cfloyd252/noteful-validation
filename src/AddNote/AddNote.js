@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ApiContext from '../ApiContext' 
 import ValidationError from '../ValidationError/ValidationError'
+import config from '../config'
 
 export class AddNote extends Component {
   static contextType = ApiContext
@@ -65,7 +66,7 @@ export class AddNote extends Component {
     e.preventDefault()
     const { name, content, folderId } = this.state
     this.props.history.push(`/folder/${folderId.value}`)
-    fetch('http://localhost:9090/notes', {
+    fetch(`${config.API_ENDPOINT}/notes`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
