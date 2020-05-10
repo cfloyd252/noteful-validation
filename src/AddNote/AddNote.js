@@ -15,7 +15,7 @@ export class AddNote extends Component {
       value: '',
       touched: false
     },
-    folderId: {
+    folder_id: {
       value: '',
       touched: false
     },
@@ -39,9 +39,9 @@ export class AddNote extends Component {
     })
   }
 
-  updateFolderId(value) {
+  updatefolder_id(value) {
     this.setState({
-      folderId: {
+      folder_id: {
         value,
         touched: true
       }
@@ -55,8 +55,8 @@ export class AddNote extends Component {
     }
   }
 
-  validateFolderId(){
-    const name = this.state.folderId.value
+  validatefolder_id(){
+    const name = this.state.folder_id.value
     if(name.length === 0){
       return 'Please select a folder for the new note'
     }
@@ -64,8 +64,8 @@ export class AddNote extends Component {
 
   handleSubmit(e){
     e.preventDefault()
-    const { name, content, folderId } = this.state
-    this.props.history.push(`/folder/${folderId.value}`)
+    const { name, content, folder_id } = this.state
+    this.props.history.push(`/folder/${folder_id.value}`)
     fetch(`${config.API_ENDPOINT}/notes`, {
       method: 'POST',
       headers: {
@@ -74,7 +74,7 @@ export class AddNote extends Component {
       body: JSON.stringify({
         name: name.value,
         content: content.value,
-        folderId: folderId.value,
+        folder_id: folder_id.value,
         modified: Date(Date.now())
       })
     })
@@ -86,7 +86,7 @@ export class AddNote extends Component {
     })
     .then(note => {
       this.context.addNote(note)
-      this.props.history.push(`/folder/${folderId.value}`)
+      this.props.history.push(`/folder/${folder_id.value}`)
     })
     .catch(err => console.error(err))
   }
@@ -133,15 +133,15 @@ export class AddNote extends Component {
         </label>
         <select
           id='new-note-folder'
-          name='folderId'
-          onChange={e => this.updateFolderId(e.target.value)}
+          name='folder_id'
+          onChange={e => this.updatefolder_id(e.target.value)}
           required
         >
           <option value=''>Select Folder</option>
           {this.displayFolderOptions()}
         </select>
-        {this.state.folderId.touched && (
-          <ValidationError message={this.validateFolderId()} />
+        {this.state.folder_id.touched && (
+          <ValidationError message={this.validatefolder_id()} />
         )}
         <button
           type='submit'

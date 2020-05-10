@@ -6,7 +6,6 @@ import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
 import { getNotesForFolder } from '../notes-helpers'
 import './NoteListMain.css'
-import PropTypes from 'prop-types'
 
 export default class NoteListMain extends React.Component {
   static defaultProps = {
@@ -17,9 +16,9 @@ export default class NoteListMain extends React.Component {
   static contextType = ApiContext
 
   render() {
-    const { folderId } = this.props.match.params
-    const { notes=[] } = this.context
-    const notesForFolder = getNotesForFolder(notes, folderId)
+    const { folder_id } = this.props.match.params
+    const { notes } = this.context
+    const notesForFolder = getNotesForFolder(notes, folder_id)
     return (
       <section className='NoteListMain'>
         <ul>
@@ -50,6 +49,3 @@ export default class NoteListMain extends React.Component {
   }
 }
 
-NoteListMain.propTypes = {
-  match: PropTypes.object,
-}
